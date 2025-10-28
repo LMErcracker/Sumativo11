@@ -25,12 +25,22 @@ togglePassword.addEventListener('click', function() {
     eyeIcon.classList.toggle('fa-eye-slash');
 });
 
+// Toggle mostrar/ocultar contraseña (Paso 2)
+document.getElementById('togglePasswordLogin').addEventListener('click', function() {
+    const passwordLogin = document.getElementById('passwordLogin');
+    const eyeIconLogin = document.getElementById('eyeIconLogin');
+    const type = passwordLogin.type === 'password' ? 'text' : 'password';
+    passwordLogin.type = type;
+    eyeIconLogin.classList.toggle('fa-eye');
+    eyeIconLogin.classList.toggle('fa-eye-slash');
+});
+
 // Validar contraseña en tiempo real
 passwordInput.addEventListener('input', function() {
     const password = this.value;
     let strength = 0;
     const requirements = {
-        length: password.length >= 10,
+        length: password.length >= 8,
         uppercase: /[A-Z]/.test(password),
         lowercase: /[a-z]/.test(password),
         number: /[0-9]/.test(password),
@@ -122,7 +132,10 @@ loginForm.addEventListener('submit', function(e) {
         successAlert.classList.remove('d-none');
         errorAlert.classList.add('d-none');
 
-        } else {
+        setTimeout(() => {
+            resetAll();
+        }, 3000);
+    } else {
         // Contraseña incorrecta
         errorAlert.classList.remove('d-none');
         successAlert.classList.add('d-none');
@@ -142,4 +155,38 @@ loginForm.addEventListener('submit', function(e) {
 document.getElementById('resetBtn').addEventListener('click', function() {
     resetAll();
 });
+
+function resetAll() {
+    // Volver al paso 1
+    loginForm.classList.add('hidden');
+    createPasswordForm.classList.remove('hidden');
+    createPasswordForm.classList.add('fade-in');
+
+    // Resetear formularios
+    createPasswordForm.reset();
+    loginForm.reset();
+
+    // Resetear variables
+    storedPassword = '';
+    storedUsername = '';
+    attempts = 0;
+
+    // Resetear UI
+    subtitle.textContent = 'Paso 1: Crea una contraseña fuerte';
+    step1.classList.add('active');
+    step1.classList.remove('completed');
+    step2.classList.remove('active');
+
+    strengthBar.className = 'password-strength';
+    strengthText.textContent = '';
+    createBtn.disabled = true;
+
+    // Resetear requisitos
+    ['req-length', 'req-uppercase', 'req-lowercase', 'req-number', 'req-special'].forEach(id => {
+        updateRequirement(id, false);
+    });
+
+    // Ocultar alertas
+    successAlert.classList.add('d-none');
+    errorAlert.classList.add('d-none');
 }
