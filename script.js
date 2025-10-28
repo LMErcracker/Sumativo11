@@ -30,7 +30,7 @@ passwordInput.addEventListener('input', function() {
     const password = this.value;
     let strength = 0;
     const requirements = {
-        length: password.length >= 8,
+        length: password.length >= 10,
         uppercase: /[A-Z]/.test(password),
         lowercase: /[a-z]/.test(password),
         number: /[0-9]/.test(password),
@@ -122,10 +122,7 @@ loginForm.addEventListener('submit', function(e) {
         successAlert.classList.remove('d-none');
         errorAlert.classList.add('d-none');
 
-        setTimeout(() => {
-            resetAll();
-        }, 3000);
-    } else {
+        } else {
         // Contraseña incorrecta
         errorAlert.classList.remove('d-none');
         successAlert.classList.add('d-none');
