@@ -25,16 +25,6 @@ togglePassword.addEventListener('click', function() {
     eyeIcon.classList.toggle('fa-eye-slash');
 });
 
-// Toggle mostrar/ocultar contraseña (Paso 2)
-document.getElementById('togglePasswordLogin').addEventListener('click', function() {
-    const passwordLogin = document.getElementById('passwordLogin');
-    const eyeIconLogin = document.getElementById('eyeIconLogin');
-    const type = passwordLogin.type === 'password' ? 'text' : 'password';
-    passwordLogin.type = type;
-    eyeIconLogin.classList.toggle('fa-eye');
-    eyeIconLogin.classList.toggle('fa-eye-slash');
-});
-
 // Validar contraseña en tiempo real
 passwordInput.addEventListener('input', function() {
     const password = this.value;
