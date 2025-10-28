@@ -142,38 +142,4 @@ loginForm.addEventListener('submit', function(e) {
 document.getElementById('resetBtn').addEventListener('click', function() {
     resetAll();
 });
-
-function resetAll() {
-    // Volver al paso 1
-    loginForm.classList.add('hidden');
-    createPasswordForm.classList.remove('hidden');
-    createPasswordForm.classList.add('fade-in');
-
-    // Resetear formularios
-    createPasswordForm.reset();
-    loginForm.reset();
-
-    // Resetear variables
-    storedPassword = '';
-    storedUsername = '';
-    attempts = 0;
-
-    // Resetear UI
-    subtitle.textContent = 'Paso 1: Crea una contraseña fuerte';
-    step1.classList.add('active');
-    step1.classList.remove('completed');
-    step2.classList.remove('active');
-
-    strengthBar.className = 'password-strength';
-    strengthText.textContent = '';
-    createBtn.disabled = true;
-
-    // Resetear requisitos
-    ['req-length', 'req-uppercase', 'req-lowercase', 'req-number', 'req-special'].forEach(id => {
-        updateRequirement(id, false);
-    });
-
-    // Ocultar alertas
-    successAlert.classList.add('d-none');
-    errorAlert.classList.add('d-none');
 }
