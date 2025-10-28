@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Práctica de Contraseñas Seguras</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="logo">
+            <i class="fas fa-shield-alt"></i>
+            <h2 class="mt-3">Práctica de Login Seguro</h2>
+            <p class="text-muted" id="subtitle">Paso 1: Crea una contraseña fuerte</p>
+        </div>
+
+        <div class="step-indicator">
+            <div class="step active" id="step1">1</div>
+            <div class="step" id="step2">2</div>
+        </div>
+
+        <!-- PASO 1: Crear contraseña -->
+        <form id="createPasswordForm" class="fade-in">
+            <div class="mb-3">
+                <label for="username" class="form-label">
+                    <i class="fas fa-user"></i> Usuario
+                </label>
+                <input type="text" class="form-control" id="username" placeholder="Ingresa tu usuario" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="password" class="form-label">
+                    <i class="fas fa-lock"></i> Contraseña
+                </label>
+                <div class="input-group">
+                    <input type="password" class="form-control" id="password" placeholder="Crea una contraseña segura" required>
+                    <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                        <i class="fas fa-eye" id="eyeIcon"></i>
+                    </button>
+                </div>
+                <div class="password-strength" id="strengthBar"></div>
+                <small id="strengthText" class="text-muted"></small>
+            </div>
+
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h6 class="card-title">Requisitos de contraseña:</h6>
+                    <div class="requirement unmet" id="req-length">
+                        <i class="fas fa-times-circle"></i> Mínimo 8 caracteres
+                    </div>
+                    <div class="requirement unmet" id="req-uppercase">
+                        <i class="fas fa-times-circle"></i> Al menos una mayúscula
+                    </div>
+                    <div class="requirement unmet" id="req-lowercase">
+                        <i class="fas fa-times-circle"></i> Al menos una minúscula
+                    </div>
+                    <div class="requirement unmet" id="req-number">
+                        <i class="fas fa-times-circle"></i> Al menos un número
+                    </div>
+                    <div class="requirement unmet" id="req-special">
+                        <i class="fas fa-times-circle"></i> Al menos un carácter especial (!@#$%^&*)
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-login w-100" id="createBtn" disabled>
+                <i class="fas fa-arrow-right"></i> Continuar al Paso 2
+            </button>
+        </form>
+
+        <!-- PASO 2: Verificar contraseña -->
+        <form id="loginForm" class="hidden">
+            <div class="alert alert-info">
+                <i class="fas fa-info-circle"></i> Ahora intenta recordar e ingresar la contraseña que creaste
+            </div>
+
+            <div class="mb-3">
+                <label for="usernameLogin" class="form-label">
+                    <i class="fas fa-user"></i> Usuario
+                </label>
+                <input type="text" class="form-control" id="usernameLogin" readonly>
+            </div>
+
+            <div class="mb-3">
+                <label for="passwordLogin" class="form-label">
+                    <i class="fas fa-lock"></i> Contraseña
+                </label>
+                <div class="input-group">
+                    <input type="password" class="form-control" id="passwordLogin" placeholder="Ingresa tu contraseña" required>
+                    <button class="btn btn-outline-secondary" type="button" id="togglePasswordLogin">
+                        <i class="fas fa-eye" id="eyeIconLogin"></i>
+                    </button>
+                </div>
+                <small class="text-muted">Intenta recordar la contraseña sin verla</small>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-login w-100">
+                <i class="fas fa-sign-in-alt"></i> Iniciar Sesión
+            </button>
+
+            <button type="button" class="btn btn-outline-secondary w-100 mt-2" id="resetBtn">
+                <i class="fas fa-redo"></i> Crear Nueva Contraseña
+            </button>
+        </form>
+
+        <!-- Alertas -->
+        <div class="alert alert-success mt-3 d-none" id="successAlert">
+            <i class="fas fa-check-circle"></i> ¡Excelente! Recordaste tu contraseña correctamente.
+        </div>
+
+        <div class="alert alert-danger mt-3 d-none" id="errorAlert">
+            <i class="fas fa-times-circle"></i> <span id="errorMessage">Contraseña incorrecta. Intenta nuevamente.</span>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
